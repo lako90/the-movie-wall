@@ -6,10 +6,13 @@ import { bindActionCreators } from 'redux';
 
 import Input from 'reactstrap/lib/Input';
 import ListGroup from 'reactstrap/lib/ListGroup';
+import ListGroupItem from 'reactstrap/lib/ListGroupItem';
 
-import SearchResult from '../../components/SearchResult';
+import MovieRow from '../../components/MovieRow';
 
 import searchAction from './actions';
+
+const tmdbImageUrl = process.env.REACT_APP_TMDB_IMAGE_URL;
 
 const Container = styled.div`
   padding: 50px 30px;
@@ -35,15 +38,41 @@ class Search extends Component {
     this.inputSearch = React.createRef();
   }
 
+  componentDidMount() {
+    this.inputSearch.current.focus();
+  }
+
   handleSearch = () => {
     const { search } = this.props;
+    const inputSearchValue = this.inputSearch.current.value;
 
-    search(this.inputSearch.current.value);
+    search(inputSearchValue);
   }
 
   renderList = results => (
     <ListGroup>
-      {results.map(result => <SearchResult data={result} />)}
+      {results.map(({
+        id,
+        title,
+        release_date: releaseDate,
+        poster_path: posterPath,
+        vote_average: voteAverage,
+        overview,
+      }) => (
+        <ListGroupItem
+          key={id}
+          style={{ padding: 10 }}
+        >
+          <MovieRow
+            id={id}
+            title={title}
+            releaseDate={releaseDate}
+            posterPath={posterPath ? `${tmdbImageUrl}w200${posterPath}` : undefined}
+            voteAverage={voteAverage}
+            overview={overview}
+          />
+        </ListGroupItem>
+      ))}
     </ListGroup>
   )
 
@@ -53,7 +82,7 @@ class Search extends Component {
     return (
       <Container>
         <Input
-          placeholder={'Search a movie'}
+          placeholder="Search a movie"
           innerRef={this.inputSearch}
           onChange={this.handleSearch}
         />

@@ -25,6 +25,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-lines-ellipsis": "^0.13.2",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.4",
     "reactstrap": "^6.5.0",
@@ -34,7 +35,7 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-lako-react": "^1.0.4",
+    "eslint-config-lako-react": "^1.0.6",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",

@@ -1,4 +1,9 @@
-import { SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_ERROR } from './constants';
+import {
+  SEARCH_RESET,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_ERROR,
+} from './constants';
 
 const initialState = {
   loading: false,
@@ -8,6 +13,9 @@ const initialState = {
 
 const searchReducer = (state = initialState, { type, movies }) => {
   switch (type) {
+    case SEARCH_RESET:
+      return initialState;
+
     case SEARCH_REQUEST:
       return {
         loading: true,

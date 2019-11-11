@@ -1,6 +1,12 @@
 import tmdbInstance from '../../libraries/axios';
-import { SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_ERROR } from './constants';
+import {
+  SEARCH_RESET,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_ERROR,
+} from './constants';
 
+const searchReset = () => ({ type: SEARCH_RESET });
 const searchRequest = () => ({ type: SEARCH_REQUEST });
 const searchSuccess = movies => ({
   type: SEARCH_SUCCESS,
@@ -23,6 +29,7 @@ const search = query => (dispatch) => {
   }).then(({ data }) => {
     dispatch(searchSuccess(data));
   }).catch(() => {
+    dispatch(searchReset());
     dispatch(searchError());
   });
 };
